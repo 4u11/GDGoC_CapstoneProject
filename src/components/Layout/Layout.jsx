@@ -11,7 +11,7 @@ export default function Layout() {
           <ProfileDropdown />
         </header>
         <main className="p-6">
-          <Outlet /> {/* This renders child routes */}
+          <Outlet /> 
         </main>
       </div>
     </div>
