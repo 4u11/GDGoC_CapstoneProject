@@ -8,6 +8,7 @@ import {
   ChevronDoubleLeftIcon,
   ChevronDoubleRightIcon
 } from '@heroicons/react/24/outline';
+import img1 from '../Common/images/logo.jpg';
 
 export default function Sidebar() {
   const [collapsed, setCollapsed] = useState(false);
@@ -21,6 +22,16 @@ export default function Sidebar() {
 
   return (
     <div className={`flex flex-col h-full bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 transition-all duration-300 ${collapsed ? 'w-20' : 'w-64'}`}>
+      
+      {/* Logo Section */}
+      <div className="flex items-center justify-center py-4">
+        <img 
+          src={img1} 
+          alt="Nocturnal Team Logo" 
+          className={`transition-all duration-300 ${collapsed ? 'w-10' : 'w-32'}`} 
+        />
+      </div>
+  
       {/* Collapse Button */}
       <div className="flex justify-end p-2">
         <button 
