@@ -3,7 +3,7 @@ import { collection, getDocs, addDoc, updateDoc, deleteDoc, doc, query } from 'f
 import { db } from '../../services/firebase';
 import DataTable from '../../components/Common/DataTable';
 import DestinationForm from '../Management/DestinationForm';
-import ErrorBoundary from '../../ErrorBoundary';
+import ErrorBoundary from '../../components/Common/ErrorBoundary';
 
 export default function ManageDestinations() {
   const [destinations, setDestinations] = useState([]);
@@ -107,30 +107,7 @@ export default function ManageDestinations() {
           onChange={(e) => setSearchTerm(e.target.value)}
         />
       </div>
-      <ErrorBoundary>
-  <DataTable
-    columns={[
-      { header: 'City', accessor: 'city' },
-      { header: 'Country', accessor: 'country' },
-      { header: 'Price', accessor: 'price' },
-      { header: 'Rating', accessor: 'rating' },
-      {
-        header: 'Actions',
-        cell: (row) => (
-          <div className="flex space-x-2">
-            <button onClick={() => handleEdit(row)}>Edit</button>
-            <button onClick={() => handleDelete(row.id)}>Delete</button>
-          </div>
-        )
-      }
-    ]}
-    data={paginatedData}
-    loading={loading}
-    currentPage={currentPage}
-    totalPages={Math.ceil(filteredData.length / itemsPerPage)}
-    onPageChange={setCurrentPage}
-  />
-</ErrorBoundary>
+     
       <DataTable
         columns={[
           { header: 'City', accessor: 'city' },
