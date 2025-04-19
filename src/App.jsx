@@ -1,4 +1,3 @@
-
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from './contexts/AuthContext';
 import Layout from './components/Layout/Layout';
@@ -8,7 +7,7 @@ import ManageDestinations from './pages/Management/Destination';
 import ManageVacations from './pages/Management/Vacations';
 import ManageUsers from './pages/Management/Users';
 import ManageBookings from './pages/Management/Bookings';
-
+import LandingPage from './pages/LandingPage';
 
 function ProtectedRoute({ children }) {
   const { currentUser } = useAuth();
@@ -20,8 +19,12 @@ export default function App() {
     <BrowserRouter>
       <AuthProvider>
         <Routes>
+          {/* Public routes */}
+          <Route path="/" element={<LandingPage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+
+          {/* Protected dashboard routes */}
           <Route
             path="/*"
             element={
