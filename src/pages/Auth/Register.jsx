@@ -17,7 +17,6 @@ export default function Register() {
     e.preventDefault();
     setError('');
 
-    // Basic validation
     if (password !== confirmPassword) {
       setError('Passwords do not match');
       return;
@@ -31,7 +30,7 @@ export default function Register() {
     try {
       setLoading(true);
       await createUserWithEmailAndPassword(auth, email, password);
-      navigate('/manage-destinations'); // Redirect after successful registration
+      navigate('/manage-destinations');
     } catch (err) {
       console.error('Registration error:', err);
       switch (err.code) {
@@ -53,27 +52,26 @@ export default function Register() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50">
-      <div className="bg-white p-8 rounded-lg shadow-md w-96 relative">
-        <Link 
-          to="/login" 
+    <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
+      <div className="bg-white p-8 rounded-xl shadow-md w-full max-w-sm relative">
+        <Link
+          to="/login"
           className="absolute top-4 left-4 text-gray-500 hover:text-gray-700"
         >
           <ArrowLeftIcon className="h-5 w-5" />
         </Link>
 
-        <div className="text-center">
-          <h1 className="text-2xl font-bold mb-6">Create Account</h1>
-          {error && (
-            <div className="mb-4 p-2 bg-red-100 text-red-700 rounded-md text-sm">
-              {error}
-            </div>
-          )}
-        </div>
+        <h1 className="text-2xl font-bold text-center mb-6">Create Account</h1>
+
+        {error && (
+          <div className="mb-4 p-3 bg-red-100 border border-red-300 text-red-700 rounded-md text-sm">
+            {error}
+          </div>
+        )}
 
         <form onSubmit={handleRegister} className="space-y-4">
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="email" className="block text-sm font-medium mb-1">
               Email Address*
             </label>
             <input
@@ -81,14 +79,14 @@ export default function Register() {
               id="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full p-2 border rounded-md"
+              className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
               required
               autoComplete="email"
             />
           </div>
 
           <div>
-            <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="password" className="block text-sm font-medium mb-1">
               Password* (min 6 characters)
             </label>
             <div className="relative">
@@ -97,7 +95,7 @@ export default function Register() {
                 id="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full p-2 border rounded-md pr-10"
+                className="w-full px-3 py-2 border rounded-md pr-10 focus:outline-none focus:ring-2 focus:ring-blue-400"
                 required
                 minLength="6"
                 autoComplete="new-password"
@@ -106,6 +104,7 @@ export default function Register() {
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
                 className="absolute inset-y-0 right-0 pr-3 flex items-center"
+                aria-label={showPassword ? "Hide password" : "Show password"}
               >
                 {showPassword ? (
                   <EyeSlashIcon className="h-5 w-5 text-gray-500" />
@@ -117,7 +116,7 @@ export default function Register() {
           </div>
 
           <div>
-            <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="confirmPassword" className="block text-sm font-medium mb-1">
               Confirm Password*
             </label>
             <input
@@ -125,7 +124,7 @@ export default function Register() {
               id="confirmPassword"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
-              className="w-full p-2 border rounded-md"
+              className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
               required
               minLength="6"
               autoComplete="new-password"
@@ -135,20 +134,20 @@ export default function Register() {
           <button
             type="submit"
             disabled={loading}
-            className={`w-full py-2 px-4 rounded-md text-white ${loading ? 'bg-blue-400' : 'bg-blue-500 hover:bg-blue-600'}`}
+            className={`w-full py-2 px-4 rounded-md text-white font-semibold ${
+              loading ? 'bg-blue-400 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-700'
+            }`}
           >
             {loading ? 'Creating Account...' : 'Register'}
           </button>
         </form>
 
-        <div className="mt-4 text-center text-sm">
-          <p className="text-gray-600">
-            Already have an account?{' '}
-            <Link to="/login" className="text-blue-500 hover:text-blue-600">
-              Sign in
-            </Link>
-          </p>
-        </div>
+        <p className="mt-4 text-center text-sm text-gray-600">
+          Already have an account?{' '}
+          <Link to="/login" className="text-blue-500 hover:text-blue-600 font-medium">
+            Sign in
+          </Link>
+        </p>
       </div>
     </div>
   );
