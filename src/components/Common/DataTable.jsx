@@ -45,7 +45,7 @@ export default function DataTable({
   // Loading and empty states
   if (loading) {
     return (
-      <div className="p-4 text-center text-gray-500">
+      <div className="p-4 text-center text-gray-500 dark:text-gray-400">
         Loading data...
       </div>
     );
@@ -53,22 +53,22 @@ export default function DataTable({
 
   if (safeData.length === 0) {
     return (
-      <div className="p-4 text-center text-gray-500">
+      <div className="p-4 text-center text-gray-500 dark:text-gray-400">
         No data available
       </div>
     );
   }
 
   return (
-    <div className="overflow-x-auto bg-white rounded-lg shadow">
-      <table className="min-w-full divide-y divide-gray-200">
-        <thead className="bg-gray-50">
+    <div className="overflow-x-auto bg-white dark:bg-gray-800 rounded-lg shadow">
+      <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+        <thead className="bg-gray-50 dark:bg-gray-700">
           <tr>
             {safeColumns.map((column) => (
               <th
                 key={column.header}
                 onClick={() => column.accessor && handleSort(column.accessor)}
-                className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100"
+                className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600"
               >
                 <div className="flex items-center">
                   {column.header}
@@ -82,13 +82,13 @@ export default function DataTable({
             ))}
           </tr>
         </thead>
-        <tbody className="bg-white divide-y divide-gray-200">
+        <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
           {sortedData.map((row, rowIndex) => (
-            <tr key={`row-${rowIndex}`} className="hover:bg-gray-50">
+            <tr key={`row-${rowIndex}`} className="hover:bg-gray-50 dark:hover:bg-gray-700">
               {safeColumns.map((column) => (
                 <td
                   key={`${rowIndex}-${column.accessor}`}
-                  className="px-6 py-4 whitespace-nowrap text-sm text-gray-500"
+                  className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300"
                 >
                   {column.cell ? column.cell(row) : (row[column.accessor] || '-')}
                 </td>
@@ -99,21 +99,21 @@ export default function DataTable({
       </table>
       
       {totalPages > 1 && (
-        <div className="px-6 py-3 bg-gray-50 flex items-center justify-between">
+        <div className="px-6 py-3 bg-gray-50 dark:bg-gray-700 flex items-center justify-between">
           <button
             onClick={() => onPageChange(currentPage - 1)}
             disabled={currentPage === 1}
-            className="px-3 py-1 border rounded disabled:opacity-50"
+            className="px-3 py-1 border rounded disabled:opacity-50 text-gray-700 dark:text-gray-300 border-gray-300 dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-600"
           >
             Previous
           </button>
-          <span className="text-sm text-gray-700">
+          <span className="text-sm text-gray-700 dark:text-gray-300">
             Page {currentPage} of {totalPages}
           </span>
           <button
             onClick={() => onPageChange(currentPage + 1)}
             disabled={currentPage === totalPages}
-            className="px-3 py-1 border rounded disabled:opacity-50"
+            className="px-3 py-1 border rounded disabled:opacity-50 text-gray-700 dark:text-gray-300 border-gray-300 dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-600"
           >
             Next
           </button>
